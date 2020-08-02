@@ -56,3 +56,31 @@ imagen_validacion=validacion_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical'
 )
+
+cnn=Sequential() #le decimos que son varias capas secuenciales
+
+cnn.add(Convolution2D(filtrosCon1, tamano_filtro1, padding='same', input_shape=(altura, longuitud), activation='relu'))
+cnn.add(MaxPooling2D(pool_size=tamano_pool))
+
+cnn.add(Convolution2D(filtrosCon2, tamano_filtro1, padding='same', activation='relu'))
+cnn.add(MaxPooling2D(pool_size=tamano_pool))
+
+cnn.add(Flatten())
+
+cnn.add(Dense(256, activation='relu')) #anade una capa donde cada neurona esta conectada a las neuronas de la capa anterior
+
+cnn.add(Dropout(0.5)) #a la capa densa durante el entrenamiento se le apagara 50% de las neuronas cada paso, para evitar overfitting
+#prendiendo caminos alternos para clasificar la data
+
+cnn.add(Dense(clases,activation='softmax'))
+#con esta ultima capa lo que hacemos es ver los valores porcentuales de ver a que categoria pertenece
+
+cnn.compile(loss='categorical_crossentropy',optimizer=optimizers.Adam(lr=lr), metrics=['accuracy'])
+#durante el entrenamiento su fucion de perdida sera categorical_crossentropy con una optimizacion lr y la metrica es para saber que tan bien esta aprendiendo la red
+
+cnn.fit(imagen_entrenamiento, steps_per_epoch=pasos, epoch=epocas, imagen_validacion=imagen_validacion, validation_steps=pasos_validacion)
+#va a correr 1000 pasos en las epocas y luego de cada correra 300 pasos de las de validacion
+
+directorio= './modelo/' #directorio donde va a quedar guardado el modelo
+if not os.path.exists(directorio):
+    os.mkdir(directorio)
