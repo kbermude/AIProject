@@ -1,6 +1,6 @@
 # AIProject
 project\
-    /data\
+-    /data\
         /entrenamiento      80% del dataset\
             /cardboard\
             /glass\
@@ -22,4 +22,4 @@ project\
         /plastic\
     cnn.py\
     entrenar.py\
-    predecir.py\
+    predecir.py
