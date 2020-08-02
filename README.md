@@ -1,25 +1,26 @@
 # AIProject
-project\
--    /data\
-        /entrenamiento      80% del dataset\
-            /cardboard\
-            /glass\
-            /metal\
-            /paper\
-            /plastic\
-        /validacion         20% del dataset\
-            /cardboard\
-            /glass\
-            /metal\
-            /paper\
-            /plastic\
-        clasificador.py\
-    /orginal                100% del dataset\
-        /cardboard\
-        /glass\
-        /metal\
-        /paper\
-        /plastic\
-    cnn.py\
-    entrenar.py\
-    predecir.py
+.
+├── data
+│   ├── entrenamiento
+│   │   └──cardboard
+│   │   └──glass
+│   │   └──metal
+│   │   └──paper
+│   │   └──plastic
+│   └── validacion
+│   │   └──cardboard
+│   │   └──glass
+│   │   └──metal
+│   │   └──paper
+│   │   └──plastic
+│   └──clasificador.py
+├── original
+│   └──cardboard
+│   └──glass
+│   └──metal
+│   └──paper
+│   └──plastic
+├── cnn.py
+├── entrenar.pyt
+├── predecir.py
+└── README.md
