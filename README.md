@@ -1,5 +1,5 @@
 # AIProject
-project
+project\
     /data
         /entrenamiento      80% del dataset
             /cardboard
