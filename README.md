@@ -1,6 +1,6 @@
 # AIProject
-.
-├── data
+.\
+├── data\
 │   ├── entrenamiento
 │   │   └──cardboard
 │   │   └──glass
