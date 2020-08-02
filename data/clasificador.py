@@ -10,7 +10,7 @@ for i in types:
     pathVal="/validacion/"+i
     with os.scandir(path) as ficheros:
         ficheros = [fichero.name for fichero in ficheros if fichero.is_file()]
-    a=int(round(len(ficheros)*0.8,0)) #80 - entrenamiento 
+    a=int(round(len(ficheros)*0.8,0)) #80% - entrenamiento 
     #b=len(ficheros)-a #20 validacion
     #print(len(ficheros),a,b)
     for j in range(len(ficheros)):
