@@ -17,9 +17,13 @@ def predict(imagen):
     resultado=arreglo[0]
     respuesta=np.argmax(resultado)
     print(types[respuesta],imagen)
-    return respuesta
-    
+    return types[respuesta]
+l=['cardboard','metal','metal','metal','glass','paper','cardboard']  
 
-for i in range(7):
-    var="prueba"+str(i)+".jpg"
-    predict(var)
+def comprobar():
+    for i in range(7):
+        var="prueba"+str(i)+".jpg"
+        a=predict(var)
+        print(a,l[i],a==l[i])
+
+comprobar()

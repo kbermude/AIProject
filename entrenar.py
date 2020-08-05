@@ -7,22 +7,23 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dropout, Flatten, Dense, Activation
 from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D
 from tensorflow.python.keras import backend as K #para matar sesiones de keras
-
+from data.clasificador import randomizar
 
 K.clear_session()
-
+randomizar()
 data_entrenamiento='./data/entrenamiento'
 data_validacion='./data/validacion'
 
 #parametros
-epocas=100
+epocas=50
 altura, longuitud= 100,100 #redimensionar imagen
 batch_size=32 #numero de imagenes a procesar por pasos
-pasos=800 #numero de veces que se va a procesar la info por epoca
+pasos=1000 #numero de veces que se va a procesar la info por epoca
 pasos_validacion=200 #al final de las epocas se correra con el set de datos de la val para ver que aprende el algoritmo
 filtrosCon1=32 
 filtrosCon2=64
 filtrosCon3=32
+filtrosCon4=32
 tamano_filtro=(3,3)
 tamano_pool=(2,2) #tamano de filtro de maxpooling
 clases=5 #clases de la basura
@@ -69,6 +70,9 @@ cnn.add(MaxPooling2D(pool_size=tamano_pool))
 cnn.add(Convolution2D(filtrosCon3, tamano_filtro, padding='same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
+cnn.add(Convolution2D(filtrosCon4, tamano_filtro, padding='same', activation='relu'))
+cnn.add(MaxPooling2D(pool_size=tamano_pool))
+
 cnn.add(Flatten())
 
 cnn.add(Dense(256, activation='relu')) #anade una capa donde cada neurona esta conectada a las neuronas de la capa anterior
@@ -91,3 +95,4 @@ if not os.path.exists(directorio):
 
 cnn.save('./modelo/modelo.h5')
 cnn.save_weights('./modelo/pesos.h5')
+
