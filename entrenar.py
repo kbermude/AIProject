@@ -21,10 +21,11 @@ batch_size=32 #numero de imagenes a procesar por pasos
 pasos=1000 #numero de veces que se va a procesar la info por epoca
 pasos_validacion=200 #al final de las epocas se correra con el set de datos de la val para ver que aprende el algoritmo
 filtrosCon1=32 
-filtrosCon2=64
-filtrosCon3=32
-filtrosCon4=32
-tamano_filtro=(3,3)
+filtrosCon2=32
+filtrosCon3=64
+filtrosCon4=64
+tamano_filtro=(5,5)
+tamano_filtro2=(3,3)
 tamano_pool=(2,2) #tamano de filtro de maxpooling
 clases=5 #clases de la basura
 lr=0.0005 #learning rate
@@ -67,10 +68,10 @@ cnn.add(MaxPooling2D(pool_size=tamano_pool))
 cnn.add(Convolution2D(filtrosCon2, tamano_filtro, padding='same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
-cnn.add(Convolution2D(filtrosCon3, tamano_filtro, padding='same', activation='relu'))
+cnn.add(Convolution2D(filtrosCon3, tamano_filtro2, padding='same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
-cnn.add(Convolution2D(filtrosCon4, tamano_filtro, padding='same', activation='relu'))
+cnn.add(Convolution2D(filtrosCon4, tamano_filtro2, padding='same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
 cnn.add(Flatten())
