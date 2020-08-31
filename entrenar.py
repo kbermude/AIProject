@@ -38,8 +38,8 @@ entrenamiento_datagen= ImageDataGenerator(
     shear_range=0.3,
     zoom_range=0.3,
     horizontal_flip=True,
-    vertical_flip = True,
-    rotation_range = 90
+    #vertical_flip = True,
+    #rotation_range = 90
 )
 #rescale= reecala la imagen 
 #shear_range =va a inclinar la imagen para que aprenda que no siempre alguna clase tendra esa direccion
