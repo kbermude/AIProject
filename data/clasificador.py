@@ -4,7 +4,7 @@ import random as rnd
 import errno
 
 path1 = os.path.abspath(os.path.dirname(__file__))
-support= "c:/Users/eduar/git/AIProject/data"
+support= "C:/Users/ferva/Desktop/AIProject-master/data"
 types=["cardboard/","glass/","metal/","paper/","plastic/"]
 def randomizar():
     for i in types:
