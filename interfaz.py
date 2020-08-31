@@ -6,9 +6,9 @@ filename=''
 tipo=''
 pos1=200
 def ask():
-    label3=Label(root,text="                                 ")
+    label3=Label(root,text="                                       ")
     label3.place(x=pos1,y=40)
-    label5=Label(root,text="                                 ")
+    label5=Label(root,text="                                       ")
     label5.place(x=pos1,y=80)
     filename = askopenfilename() 
     label3=Label(root,text=filename)

@@ -2,13 +2,14 @@ import sys
 import os
 from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.python.keras import optimizers
+from keras.callbacks import ModelCheckpoint
 from tensorflow.keras.optimizers import Adam
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dropout, Flatten, Dense, Activation
 from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D
 from tensorflow.python.keras import backend as K #para matar sesiones de keras
 from data.clasificador import randomizar
-
+import matplotlib.pyplot as plt
 K.clear_session()
 randomizar()
 data_entrenamiento='./data/entrenamiento'
@@ -36,7 +37,9 @@ entrenamiento_datagen= ImageDataGenerator(
     rescale=1./255,
     shear_range=0.3,
     zoom_range=0.3,
-    horizontal_flip=True
+    horizontal_flip=True,
+    vertical_flip = True,
+    rotation_range = 90
 )
 #rescale= reecala la imagen 
 #shear_range =va a inclinar la imagen para que aprenda que no siempre alguna clase tendra esa direccion
@@ -86,8 +89,8 @@ cnn.add(Dense(clases,activation='softmax'))
 
 cnn.compile(loss='categorical_crossentropy', optimizer=Adam(lr=lr), metrics=['accuracy'])
 #durante el entrenamiento su fucion de perdida sera categorical_crossentropy con una optimizacion lr y la metrica es para saber que tan bien esta aprendiendo la red
-
-cnn.fit_generator(imagen_entrenamiento, steps_per_epoch=int(pasos/batch_size), epochs=epocas, validation_data=imagen_validacion, validation_steps=int(pasos_validacion/batch_size))
+checkpointer = ModelCheckpoint(filepath='./modelo/best.hdf5', verbose=1, save_best_only=True)
+history=cnn.fit_generator(imagen_entrenamiento, steps_per_epoch=int(pasos/batch_size), epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer], validation_steps=int(pasos_validacion/batch_size))
 #va a correr 1000 pasos en las epocas y luego de cada correra 300 pasos de las de validacion
 
 directorio= './modelo/' #directorio donde va a quedar guardado el modelo
@@ -97,3 +100,37 @@ if not os.path.exists(directorio):
 cnn.save('./modelo/modelo.h5')
 cnn.save_weights('./modelo/pesos.h5')
 
+
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+epochs = range(1, len(acc) + 1)
+plt.plot(epochs, acc, 'r', label='Precisión de entrenamiento')
+plt.plot(epochs, val_acc, 'b', label='Precisión de validación')
+plt.title('Precisión de entrenamiento y validación')
+plt.xlabel('Épocas')
+plt.ylabel('Precisión')
+plt.legend()
+plt.figure()
+plt.plot(epochs, acc, 'r',  label='Training accuracy')
+plt.plot(epochs, val_acc, 'b', label='Validation accuracy')
+plt.title('Accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.figure()
+plt.plot(epochs, loss, 'r', label='Pérdida de entrenamiento')
+plt.plot(epochs, val_loss, 'b', label='Pérdida de validación')
+plt.title('Pérdida de entrenamiento y validación')
+plt.xlabel('Épocas')
+plt.ylabel('Precisión')
+plt.legend()
+plt.figure()
+plt.plot(epochs, loss, 'r', label='Training loss')
+plt.plot(epochs, val_loss, 'b', label='Validation loss')
+plt.title('Loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.show()
