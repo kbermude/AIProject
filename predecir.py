@@ -16,8 +16,9 @@ def predict(imagen):
     arreglo=cnn.predict(x)
     resultado=arreglo[0]
     respuesta=np.argmax(resultado)
-    print(types[respuesta],imagen)
     return types[respuesta]
+
+
 l=['cardboard','metal','metal','metal','glass','paper','cardboard']  
 
 def comprobar():
@@ -26,4 +27,3 @@ def comprobar():
         a=predict(var)
         print(a,l[i],a==l[i])
 
-comprobar()
