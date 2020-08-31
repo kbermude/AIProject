@@ -6,16 +6,26 @@ filename=''
 tipo=''
 pos1=200
 def ask():
-    label3=Label(root,text="                                       ")
+    label3=Label(root,text="                                                                      ")
     label3.place(x=pos1,y=40)
-    label5=Label(root,text="                                       ")
+    label5=Label(root,text="                                                                      ")
     label5.place(x=pos1,y=80)
     filename = askopenfilename() 
-    label3=Label(root,text=filename)
+    f=filename.split('/')
+    label3=Label(root,text=f[-1])
     label3.place(x=pos1,y=40)
     tipo=predict(filename)
     label5=Label(root,text=tipo)
     label5.place(x=pos1,y=80)
+    im=Image.open(filename)
+    #miniatura = (160, 120)
+    #im=im.thumbnail(miniatura)
+    im = im.resize((250, 250), Image.ANTIALIAS)
+    photo=ImageTk.PhotoImage(im)
+    photoimg=Label(root,image=photo)
+    photoimg.image=photo
+    photoimg.place(x=175,y=150)
+
 root=Tk()
 root.title("Trash sorter")
 root.resizable(True,True)
