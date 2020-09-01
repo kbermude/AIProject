@@ -11,7 +11,7 @@ from tensorflow.python.keras import backend as K #para matar sesiones de keras
 from data.clasificador import randomizar
 import matplotlib.pyplot as plt
 K.clear_session()
-randomizar()
+#randomizar()
 data_entrenamiento='./data/entrenamiento'
 data_validacion='./data/validacion'
 
@@ -92,7 +92,7 @@ cnn.compile(loss='categorical_crossentropy', optimizer=Adam(lr=lr), metrics=['ac
 checkpointer = ModelCheckpoint(filepath='./modelo/best.hdf5', verbose=1, save_best_only=True)
 history=cnn.fit_generator(imagen_entrenamiento, steps_per_epoch=int(pasos/batch_size), epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer], validation_steps=int(pasos_validacion/batch_size))
 #va a correr 1000 pasos en las epocas y luego de cada correra 300 pasos de las de validacion
-
+cnn.summary()
 directorio= './modelo/' #directorio donde va a quedar guardado el modelo
 if not os.path.exists(directorio):
     os.mkdir(directorio)
