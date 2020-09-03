@@ -21,11 +21,3 @@ def predict(imagen):
     return types[respuesta]
 
 
-l=['cardboard','metal','metal','metal','glass','paper','cardboard']  
-
-def comprobar():
-    for i in range(7):
-        var="prueba"+str(i)+".jpg"
-        a=predict(var)
-        print(a,l[i],a==l[i])
-

@@ -29,7 +29,7 @@ tamano_filtro=(5,5)
 tamano_filtro2=(3,3)
 tamano_pool=(2,2) #tamano de filtro de maxpooling
 clases=5 #clases de la basura
-lr=0.005 #learning rate
+lr=0.0005 #learning rate
 
 ##preprocesamiento de imagenes
 
@@ -38,13 +38,10 @@ entrenamiento_datagen= ImageDataGenerator(
     shear_range=0.3,
     zoom_range=0.3,
     horizontal_flip=True,
-    #vertical_flip = True,
-    #rotation_range = 90
+    vertical_flip = True,
+    rotation_range = 90
 )
-#rescale= reecala la imagen 
-#shear_range =va a inclinar la imagen para que aprenda que no siempre alguna clase tendra esa direccion
-#zoom_range= toma la imagen y por factor aleatorio a algunas le hace zoom, para que aprenda que no siempre la clase saldra completa
-#horizontal_flip= toma la imagen y la invierte, para que aprenda direccionamiento
+
 validacion_datagen= ImageDataGenerator(
     rescale=1./255
 )
@@ -54,8 +51,7 @@ imagen_entrenamiento=entrenamiento_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical'
 )
-#entra al directorio, a cada una de las carpetas y las imagenes
-#las va a procesar segun la definicion y categorical es la etiqueta que le damos
+
 imagen_validacion=validacion_datagen.flow_from_directory(
     data_validacion,
     target_size=(altura, longuitud),
@@ -63,7 +59,7 @@ imagen_validacion=validacion_datagen.flow_from_directory(
     class_mode='categorical'
 )
 
-cnn=Sequential() #le decimos que son varias capas secuenciales
+cnn=Sequential() 
 
 cnn.add(Convolution2D(filtrosCon1, tamano_filtro, padding='same', input_shape=(altura, longuitud,3), activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
@@ -79,21 +75,22 @@ cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
 cnn.add(Flatten())
 
-cnn.add(Dense(256, activation='relu')) #anade una capa donde cada neurona esta conectada a las neuronas de la capa anterior
+cnn.add(Dense(256, activation='relu'))
 
-cnn.add(Dropout(0.5)) #a la capa densa durante el entrenamiento se le apagara 50% de las neuronas cada paso, para evitar overfitting
-#prendiendo caminos alternos para clasificar la data
+cnn.add(Dropout(0.5)) 
 
 cnn.add(Dense(clases,activation='softmax'))
-#con esta ultima capa lo que hacemos es ver los valores porcentuales de ver a que categoria pertenece
 
-cnn.compile(loss='categorical_crossentropy', optimizer=Adam(lr=lr), metrics=['accuracy'])
+cnn.compile(loss='categorical_crossentropy', optimizer=Adam(), metrics=['accuracy'])
+#cnn.compile(loss='categorical_crossentropy', optimizer=Adam(lr=lr), metrics=['accuracy'])
+
 #durante el entrenamiento su fucion de perdida sera categorical_crossentropy con una optimizacion lr y la metrica es para saber que tan bien esta aprendiendo la red
 checkpointer = ModelCheckpoint(filepath='./modelo/best.hdf5', verbose=1, save_best_only=True)
-history=cnn.fit_generator(imagen_entrenamiento, steps_per_epoch=int(pasos/batch_size), epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer], validation_steps=int(pasos_validacion/batch_size))
-#va a correr 1000 pasos en las epocas y luego de cada correra 200 pasos de las de validacion
+#history=cnn.fit_generator(imagen_entrenamiento, steps_per_epoch=int(pasos/batch_size), epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer], validation_steps=int(pasos_validacion/batch_size))
+history=cnn.fit_generator(imagen_entrenamiento, epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer])
+
 cnn.summary()
-directorio= './modelo/' #directorio donde va a quedar guardado el modelo
+directorio= './modelo/' 
 if not os.path.exists(directorio):
     os.mkdir(directorio)
 
@@ -112,6 +109,7 @@ plt.title('Precisión de entrenamiento y validación')
 plt.xlabel('Épocas')
 plt.ylabel('Precisión')
 plt.legend()
+plt.savefig('Precision.png')
 plt.figure()
 plt.plot(epochs, acc, 'r',  label='Training accuracy')
 plt.plot(epochs, val_acc, 'b', label='Validation accuracy')
@@ -119,6 +117,7 @@ plt.title('Accuracy')
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
+plt.savefig('Accuracy.png')
 plt.figure()
 plt.plot(epochs, loss, 'r', label='Pérdida de entrenamiento')
 plt.plot(epochs, val_loss, 'b', label='Pérdida de validación')
@@ -126,6 +125,7 @@ plt.title('Pérdida de entrenamiento y validación')
 plt.xlabel('Épocas')
 plt.ylabel('Precisión')
 plt.legend()
+plt.savefig('Perdida.png')
 plt.figure()
 plt.plot(epochs, loss, 'r', label='Training loss')
 plt.plot(epochs, val_loss, 'b', label='Validation loss')
@@ -133,4 +133,4 @@ plt.title('Loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-plt.show()
+plt.savefig('Loss.png')
