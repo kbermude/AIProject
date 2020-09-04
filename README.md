@@ -1,1 +1,21 @@
 # AIProject
+
+## Detalle
+  **Reconocimiento y clasificación de desperdicios no orgánicos.**<br><br>
+  **Autores:** <br>
+  - BERMUDEZ MOREIRA KAREN
+  - ORTIZ HOLGUIN EDUARDO
+  -	VACA FERNANDO DAVID
+
+  **Tutor:** Dr. Enrique Pelaez    &nbsp; &nbsp; &nbsp;&nbsp; **Paralelo #** 1<br>
+  **Deadline:** 04/09/2020<br>
+
+## Estructura
+   + **Código** ->
+   clasificador.py archivo que randomniza las imágenes dentro del directorio
+   entrenar.py archivo que crea el modelo de toda la red convolucional
+   predecir.py archivo que llama al modelo y devuleve una proyección de la categoría mas acertada de acuerdo a la imagen ingresada.
+   interfaz.py archivo que contiene la interfaz del sistema que utiliza la red convolucional, en esta se ingresan las imágenes.
+   
+   + **Documentación** -> Reporte en versiones .pdf y .doc
+      <br>
