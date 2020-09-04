@@ -12,10 +12,10 @@
 
 ## Estructura
    + **Código** -> <br>
-   clasificador.py archivo que randomniza las imágenes dentro del directorio
-   entrenar.py archivo que crea el modelo de toda la red convolucional <br>
-   predecir.py archivo que llama al modelo y devuleve una proyección de la categoría mas acertada de acuerdo a la imagen ingresada. <br>
-   interfaz.py archivo que contiene la interfaz del sistema que utiliza la red convolucional, en esta se ingresan las imágenes. <br>
+   **clasificador.py** archivo que randomniza las imágenes dentro del directorio
+   **entrenar.py** archivo que crea el modelo de toda la red convolucional <br>
+   **predecir.py** archivo que llama al modelo y devuleve una proyección de la categoría mas acertada de acuerdo a la imagen ingresada. <br>
+   **interfaz.py** archivo que contiene la interfaz del sistema que utiliza la red convolucional, en esta se ingresan las imágenes. <br>
    
    + **Documentación** -> Reporte en versiones .pdf y .doc
       <br>
