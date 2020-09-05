@@ -1,4 +1,4 @@
-# AIProject
+# Projecto de Inteligencia Artificial
 
 ## Detalle
   **Reconocimiento y clasificación de desperdicios no orgánicos.**<br><br>
