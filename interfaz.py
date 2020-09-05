@@ -6,9 +6,9 @@ filename=''
 tipo=''
 pos1=200
 def ask():
-    label3=Label(root,text="                                                                      ")
+    label3=Label(root,text=" "*40)
     label3.place(x=pos1,y=40)
-    label5=Label(root,text="                                                                      ")
+    label5=Label(root,text=" "*40)
     label5.place(x=pos1,y=80)
     filename = askopenfilename() 
     f=filename.split('/')
@@ -25,21 +25,17 @@ def ask():
     photoimg.place(x=175,y=150)
 
 root=Tk()
-root.title("Trash sorter")
+root.title("Clasificador de Desechos")
 root.resizable(True,True)
 root.geometry("650x500")
 width=650
 height=400
-
-Button(root, text="Choose Image", command=ask).place(x=550,y=40)
-label1=Label(root,text='Trash sorter')
+Button(root, text="Seleccionar imagen", command=ask).place(x=500,y=40)
+label1=Label(root,text='Clasificador de Desechos')
 label1.place(x=325,y=10)
-label2=Label(root,text='Selected image')
+label2=Label(root,text='Imagen seleccionada:')
 label2.place(x=40,y=40)
-
-label4=Label(root,text="The image corresponds to")
+label4=Label(root,text="La imagen corresponde a:")
 label4.place(x=40,y=80)
 
-
 root.mainloop()
-
