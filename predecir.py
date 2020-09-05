@@ -2,7 +2,7 @@ import numpy as np
 from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 
-altura, longuitud= 100,100
+altura, longitud= 100,100
 modelo='./modelo/modelo.h5'
 pesos='./modelo/pesos.h5'
 best='./modelo/best.hdf5'
@@ -11,7 +11,7 @@ cnn.load_weights(best)
 types=["cardboard","glass","metal","paper","plastic"]
 
 def predict(imagen):
-    x=load_img(imagen,target_size=(longuitud,altura))
+    x=load_img(imagen,target_size=(longitud,altura))
     x=img_to_array(x)
     x=np.expand_dims(x,axis=0)
     x=x/255

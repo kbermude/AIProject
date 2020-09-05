@@ -18,8 +18,6 @@ def ask():
     label5=Label(root,text=tipo)
     label5.place(x=pos1,y=80)
     im=Image.open(filename)
-    #miniatura = (160, 120)
-    #im=im.thumbnail(miniatura)
     im = im.resize((250, 250), Image.ANTIALIAS)
     photo=ImageTk.PhotoImage(im)
     photoimg=Label(root,image=photo)
@@ -32,8 +30,7 @@ root.resizable(True,True)
 root.geometry("650x500")
 width=650
 height=400
-#frame=Frame(root, width=width, height=height)
-#frame.pack()
+
 Button(root, text="Choose Image", command=ask).place(x=550,y=40)
 label1=Label(root,text='Trash sorter')
 label1.place(x=325,y=10)
@@ -44,8 +41,5 @@ label4=Label(root,text="The image corresponds to")
 label4.place(x=40,y=80)
 
 
-
-#label2.image=photo
-#label2.pack()
 root.mainloop()
 

@@ -17,7 +17,7 @@ data_validacion='./data/validacion'
 
 #parametros
 epocas=50
-altura, longuitud= 100,100 #redimensionar imagen
+altura, longitud= 100,100 #redimensionar imagen
 batch_size=32 #numero de imagenes a procesar por pasos
 pasos=1000 #numero de veces que se va a procesar la info por epoca
 pasos_validacion=200 #al final de las epocas se correra con el set de datos de la val para ver que aprende el algoritmo
@@ -47,21 +47,21 @@ validacion_datagen= ImageDataGenerator(
 )
 imagen_entrenamiento=entrenamiento_datagen.flow_from_directory(
     data_entrenamiento,
-    target_size=(altura, longuitud),
+    target_size=(altura, longitud),
     batch_size=batch_size,
     class_mode='categorical'
 )
 
 imagen_validacion=validacion_datagen.flow_from_directory(
     data_validacion,
-    target_size=(altura, longuitud),
+    target_size=(altura, longitud),
     batch_size=batch_size,
     class_mode='categorical'
 )
 
 cnn=Sequential() 
 
-cnn.add(Convolution2D(filtrosCon1, tamano_filtro, padding='same', input_shape=(altura, longuitud,3), activation='relu'))
+cnn.add(Convolution2D(filtrosCon1, tamano_filtro, padding='same', input_shape=(altura, longitud,3), activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
 cnn.add(Convolution2D(filtrosCon2, tamano_filtro, padding='same', activation='relu'))
