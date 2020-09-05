@@ -7,7 +7,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dropout, Flatten, Dense, Activation
 from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D
-from tensorflow.python.keras import backend as K #para matar sesiones de keras
+from tensorflow.python.keras import backend as K 
 from data.clasificador import randomizar
 import matplotlib.pyplot as plt
 K.clear_session()
@@ -17,19 +17,18 @@ data_validacion='./data/validacion'
 
 #parametros
 epocas=50
-altura, longitud= 100,100 #redimensionar imagen
-batch_size=32 #numero de imagenes a procesar por pasos
-pasos=1000 #numero de veces que se va a procesar la info por epoca
-pasos_validacion=200 #al final de las epocas se correra con el set de datos de la val para ver que aprende el algoritmo
+altura, longitud= 100,100 
+batch_size=32 
+pasos=1000 
+pasos_validacion=200
 filtrosCon1=32
 filtrosCon2=32
 filtrosCon3=64
 filtrosCon4=64
 tamano_filtro=(5,5)
 tamano_filtro2=(3,3)
-tamano_pool=(2,2) #tamano de filtro de maxpooling
-clases=5 #clases de la basura
-lr=0.0005 #learning rate
+tamano_pool=(2,2) 
+clases=5 
 
 ##preprocesamiento de imagenes
 
@@ -82,11 +81,8 @@ cnn.add(Dropout(0.5))
 cnn.add(Dense(clases,activation='softmax'))
 
 cnn.compile(loss='categorical_crossentropy', optimizer=Adam(), metrics=['accuracy'])
-#cnn.compile(loss='categorical_crossentropy', optimizer=Adam(lr=lr), metrics=['accuracy'])
 
-#durante el entrenamiento su fucion de perdida sera categorical_crossentropy con una optimizacion lr y la metrica es para saber que tan bien esta aprendiendo la red
 checkpointer = ModelCheckpoint(filepath='./modelo/best.hdf5', verbose=1, save_best_only=True)
-#history=cnn.fit_generator(imagen_entrenamiento, steps_per_epoch=int(pasos/batch_size), epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer], validation_steps=int(pasos_validacion/batch_size))
 history=cnn.fit_generator(imagen_entrenamiento, epochs=epocas, validation_data=imagen_validacion,callbacks=[checkpointer])
 
 cnn.summary()
