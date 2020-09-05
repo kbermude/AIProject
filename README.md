@@ -20,7 +20,7 @@
    + **Documentación** -> Reporte en versiones .pdf y .doc
       <br>
 ## Ejecucion
-  pip install -r requirements.txt
-  **Caso 1.**  Ver interfaz para ingresar imagen: ejecutar  **interfaz.py**
-   **Caso 2.**  Entrenar modelo: ejecutar  **entrenar.py** el modelo se guarda en la carpeta modelo para poder ser utilizado para predecir.
+  pip install -r requirements.txt <br>
+  **Caso 1.**  Ver interfaz para ingresar imagen: ejecutar  **interfaz.py** <br>
+   **Caso 2.**  Entrenar modelo: ejecutar  **entrenar.py** el modelo se guarda en la carpeta modelo para poder ser utilizado para predecir. <br>
   
